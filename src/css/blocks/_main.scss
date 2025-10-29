@@ -1,0 +1,208 @@
+/* ПЕРЕМЕННЫЕ */
+@use '../variables' as *;
+
+/* МИКСИНЫ */
+@use '../mixins' as *;
+
+/**
+ * ГЛАВНАЯ СТРАНИЦА САЙТА - "MainPage"
+ */
+
+/* Раздел СТАТЬИ */
+.articles {
+    margin-top: 100px;
+}
+
+/* ИЗБРАННЫЕ статьи - Карусель */
+
+.recommended-articles-name {
+    font-weight: 600;
+    font-size: 45px;
+    line-height: 0px;
+    color: #fff;
+    text-align: center;
+
+    @media (max-width: $tablet_breakpoint) {
+        margin: 138px 16px 0 0;
+        font-size: 24px;
+        line-height: 29px;
+    }
+
+    @media (max-width: $phone_breakpoint) {
+        margin: 0;
+        font-size: 20px;
+        line-height: 24px;
+    }
+}
+
+.recommended-articles-about {
+    margin-top: 20px;
+    font-size: 16px;
+    line-height: 35px;
+    color: #fff;
+    text-align: center;
+
+    @media (max-width: $tablet_breakpoint) {
+        margin: 138px 16px 0 0;
+        font-size: 24px;
+        line-height: 29px;
+    }
+
+    @media (max-width: $phone_breakpoint) {
+        margin: 0;
+        font-size: 20px;
+        line-height: 24px;
+    }
+}
+
+/* Стили для сетки 3x2 на десктопе, адаптивной на мобильных */
+.articles-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    grid-template-rows: repeat(3, auto);
+    gap: 20px;
+
+    @media (max-width: $tablet_breakpoint) {
+        /* 1 столбец на мобильных */
+        grid-template-columns: 1fr;
+        /* Ряды автоматические */
+        grid-template-rows: auto;
+    }
+
+    @media (max-width: $phone_breakpoint) {
+        /* 1 столбец на мобильных */
+        grid-template-columns: 1fr;
+        /* Ряды автоматические */
+        grid-template-rows: auto;
+    }
+
+}
+
+.article-card {
+    background-color: rgba(255, 255, 255, 0.151);
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    outline: 1px solid rgba(255, 0, 0, 0.5);
+    border-radius: 7px;
+    text-align: center;
+    text-decoration: none;
+    transition-property: transform;
+    transition-duration: 1s;
+    padding: 16px;
+
+    &:hover {
+        transform: scale(1.05);
+        background-color: $corporate_color;
+        outline: 1px solid #f16d7f;
+    }
+}
+
+.loading {
+    text-align: center;
+    padding: 20px;
+    color: #fff;
+}
+
+/* ВСЕ статьи - Список */
+.all-articles-name {
+    margin-top: 120px;
+    font-weight: 600;
+    font-size: 45px;
+    line-height: 0px;
+    color: #fff;
+    text-align: center;
+
+    @media (max-width: $tablet_breakpoint) {
+        margin: 138px 16px 0 0;
+        font-size: 24px;
+        line-height: 29px;
+    }
+
+    @media (max-width: $phone_breakpoint) {
+        margin: 0;
+        font-size: 20px;
+        line-height: 24px;
+    }
+}
+
+/* Элементы Списка статей */
+.el-articles-wrap {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-top: 50px;
+    padding: 0;
+    gap: 20px;
+}
+
+.el-articles {
+    width: 700px;
+    background-color: rgba(255, 255, 255, 0.151);
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    outline: 1px solid rgba(255, 0, 0, 0.5);
+    border-radius: 7px;
+    list-style: none;
+    text-align: center;
+    transition-property: transform;
+    transition-duration: 1s;
+
+    &:hover {
+        transform: scale(1.1);
+        background-color: $corporate_color;
+        outline: 1px solid #f16d7f;
+    }
+}
+
+.el-articles-link {
+    /* Делаем контейнер Grid */
+    display: grid;
+    /* Две колонки: первая авто-ширина для номера, вторая занимает оставшееся пространство */
+    grid-template-columns: auto 1fr;
+    /* Две строки: для заголовка и описания */
+    grid-template-rows: auto auto;
+
+    /* Дополнительно: если это кнопка, добавь стили для интерактива */
+    text-decoration: none;
+    padding: 1rem;
+}
+
+.el-articles-number {
+    /* Левая колонка */
+    grid-column: 1;
+    /* Занимает обе строки */
+    grid-row: 1 / 3;
+    /* Стили: например, шрифт и цвет */
+    font-size: 1rem;
+    font-weight: bold;
+    color: rgb(208, 233, 197);
+}
+
+.el-articles-name {
+    /* Правая колонка */
+    grid-column: 2;
+    /* Верхняя строка */
+    grid-row: 1;
+    font-size: 20px;
+    color: #ffffff;
+    margin-bottom: 0;
+    transition-property: transform;
+    transition-duration: 1s;
+
+    &:hover {
+        color: black;
+    }
+
+}
+
+.el-articles-about {
+    /* Правая колонка */
+    grid-column: 2;
+    /* Нижняя строка */
+    grid-row: 2;
+    font-size: 16px;
+    color: #ffffff;
+    margin-bottom: 0;
+}
+
+.shows-all {
+    outline: none;
+}

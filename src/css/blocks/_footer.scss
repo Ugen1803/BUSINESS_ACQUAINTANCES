@@ -1,0 +1,114 @@
+/* ПЕРЕМЕННЫЕ */
+@use '../variables' as *;
+
+/* МИКСИНЫ */
+@use '../mixins' as *;
+
+/**
+ * FOOTER сайта
+ */
+
+.footer {
+  height: 305px;
+  margin-top: 30px;
+  background-color: grey;
+  color: #fff;
+  opacity: 0.7;
+}
+
+/* Присоединиться к чат-боту */
+.join-wrap {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.join-name {
+  margin-top: 60px;
+  font-weight: 600;
+  font-size: 45px;
+  line-height: 0px;
+  color: #fff;
+
+  @media (max-width: $tablet_breakpoint) {
+    margin: 138px 16px 0 0;
+    font-size: 24px;
+    line-height: 29px;
+  }
+
+  @media (max-width: $phone_breakpoint) {
+    margin: 0;
+    font-size: 20px;
+    line-height: 24px;
+  }
+}
+
+.join-about {
+  margin: 25px 0 40px;
+  font-size: 14px;
+  color: #fff;
+  text-align: center;
+
+  @media (max-width: $tablet_breakpoint) {
+    margin: 138px 16px 0 0;
+    font-size: 24px;
+    line-height: 29px;
+  }
+
+  @media (max-width: $phone_breakpoint) {
+    margin: 0;
+    font-size: 20px;
+    line-height: 24px;
+  }
+}
+
+.footer-wrap {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 24px 0 23px 5px;
+  margin-top: 45px;
+  border-top: 1px solid #ffffff52;
+
+  @media (max-width: $tablet_breakpoint) {
+    padding: 24px 16px 23px 16px;
+  }
+
+  @media (max-width: $phone_breakpoint) {
+    flex-direction: column-reverse;
+    padding: 43px 0 9px;
+    gap: 40px;
+  }
+}
+
+.p-footer {
+  font-size: 16px;
+  line-height: 19px;
+  color: #fbfbfb;
+}
+
+/* Элементы способов связи */
+.social-network-ico {
+  display: flex;
+  list-style-type: none;
+  gap: 7px;
+}
+
+.social-link {
+  font-size: 20px;
+  background-color: white;
+  color: #000000;
+  width: 32px;
+  height: 32px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-decoration: none;
+  transition-duration: 1s;
+
+  &:hover {
+    background-color: $corporate_color;
+    color: white;
+    transform: rotate(360deg);
+  }
+}

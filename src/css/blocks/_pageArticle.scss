@@ -1,0 +1,189 @@
+/* ПЕРЕМЕННЫЕ */
+@use '../variables' as *;
+
+/* МИКСИНЫ */
+@use '../mixins' as *;
+
+/**
+ * Cтраница со Статьёй - " PageArticle"
+ */
+
+/* Навигация хлебные крошки*/
+.breadcrumb {
+    margin-top: 120px;
+    list-style-type: none;
+    display: flex;
+
+
+    &-item {
+        font-weight: 300;
+        font-size: 14px;
+        line-height: 17px;
+
+        & a {
+            text-decoration: none;
+            color: #e2ccff;
+        }
+
+        & :hover {
+            color: $corporate_color;
+        }
+
+        &::after {
+            content: ' / \00a0';
+            color: rgb(230, 219, 219);
+        }
+
+        &:last-child:after {
+            content: '';
+        }
+
+        &-active {
+            font-size: 20px;
+            font-weight: bold;
+            color: #a1ffb1;
+        }
+    }
+}
+
+/* Блок со Статьёй - Основной контейнер текста */
+
+.page-article-wrap {
+    margin-top: 50px;
+    text-align: center;
+}
+
+.el-page-article-heading {
+    font-weight: 600;
+    font-size: 45px;
+    line-height: 55px;
+    color: #fff;
+    text-align: center;
+
+    @media (max-width: $tablet_breakpoint) {
+        margin: 138px 16px 0 0;
+        font-size: 24px;
+        line-height: 29px;
+    }
+
+    @media (max-width: $phone_breakpoint) {
+        margin: 0;
+        font-size: 20px;
+        line-height: 24px;
+    }
+}
+
+.el-page-article-description {
+    font-size: 25px;
+    line-height: 35px;
+    color: #fff;
+    text-align: center;
+
+    @media (max-width: $tablet_breakpoint) {
+        margin: 138px 16px 0 0;
+        font-size: 24px;
+        line-height: 29px;
+    }
+
+    @media (max-width: $phone_breakpoint) {
+        margin: 0;
+        font-size: 20px;
+        line-height: 24px;
+    }
+}
+
+.page-article-text {
+    /* Или ваш шрифт */
+    font-family: 'Arial', sans-serif;
+    /* Межстрочный интервал для комфорта */
+    line-height: 1.6;
+    /* Ограничим ширину для читаемости */
+    max-width: 800px;
+    margin: 0 auto;
+    padding: 20px;
+    margin-top: 40px;
+    text-align: start;
+    color: #fff;
+}
+
+/* Введение и заключение */
+.intro,
+.conclusion {
+    font-size: 1.1rem;
+    /* Выравнивание по ширине */
+    text-align: justify;
+}
+
+.conclusion {
+    font-style: italic;
+    /* Курсив для акцента */
+    color: #fff;
+    margin-bottom: 0;
+}
+
+/* Заголовки стран */
+.country-title {
+    font-size: 1.4rem;
+    font-weight: bold;
+    margin-bottom: 15px;
+    color: #bcffdb;
+    /* Синий акцент для заголовков */
+    border-bottom: 2px solid #007bff;
+    /* Лёгкая линия под заголовком */
+    padding-bottom: 5px;
+}
+
+/* Разделы стран */
+.country-section {
+    margin-bottom: 40px;
+    padding: 15px;
+    background-color: rgba(255, 255, 255, 0.151);
+    /* Светлый фон для разделов */
+    border-radius: 7px;
+    /* Скруглённые углы */
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    /* Лёгкая тень */
+}
+
+/* Списки методов */
+.methods-list {
+    list-style: none;
+    /* Убираем стандартные маркеры */
+    padding: 0;
+}
+
+.methods-list li {
+    margin-bottom: 15px;
+    padding-left: 20px;
+    position: relative;
+}
+
+.methods-list li::before {
+    /* Кастомный маркер */
+    content: "•";
+    color: #97c9fd;
+    font-size: 1.2rem;
+    position: absolute;
+    left: 0;
+    top: 0;
+}
+
+/* Акцент на названиях методов */
+.methods-list strong {
+    color: #c3e0ff;
+}
+
+/* Адаптивность для мобильных */
+@media (max-width: 768px) {
+    .page-article-text {
+        padding: 10px;
+    }
+
+    .country-section {
+        padding: 10px;
+    }
+
+    .country-title {
+        font-size: 1.2rem;
+    }
+}

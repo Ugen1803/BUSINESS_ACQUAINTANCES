@@ -1,0 +1,43 @@
+/* ПЕРЕМЕННЫЕ */
+@use '../css/variables' as *;
+
+/* MIXIN (Примеси) - группа св-в, применяемые к эл-ту.
+В селектор:
+    @include list();
+    @include default-button();
+*/
+
+/* Настройки Списка по умолчанию */
+
+@mixin list() {
+    margin: 0;
+    padding: 0;
+    list-style: none;
+}
+
+/* Настройки Кнопки по умолчанию */
+@mixin default-button() {
+    cursor: pointer;
+    text-decoration: none !important;
+    outline: 2px solid red;
+    border-radius: 7px;
+    padding: 14px 38px;
+    font-weight: normal;
+    font-size: 16px;
+    line-height: 19px;
+    color: white;
+    margin-top: 30px;
+
+    // Явно прозрачный фон
+    background-color: transparent !important;
+
+    &:hover {
+        transition-property: background-color, transform;
+        transition-duration: 0.3s;
+        outline: 2px solid #f16d7f;
+        color: black;
+
+        // !important для переопределения
+        background-color: $corporate_color !important;
+    }
+}

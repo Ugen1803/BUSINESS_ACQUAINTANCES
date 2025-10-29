@@ -1,0 +1,120 @@
+@charset "UTF-8";
+
+/* НОРМАЛИЗАЦИЯ стилей на страницах сайта */
+@use 'normalize';
+
+/* ПЕРЕМЕННЫЕ */
+@use 'variables' as *;
+
+/* МИКСИНЫ */
+@use 'mixins' as *;
+
+/**
+ * БЛОКИ SCSS
+ */
+
+/**
+ * HEADER и МЕНЮ сайта
+ */
+@use 'blocks/header';
+
+/**
+  * MAIN
+  */
+
+/* ПРОМО-БЛОК главной страницы */
+@use 'blocks/mainDescription';
+/* ГЛАВНАЯ страница */
+@use 'blocks/main';
+
+/**
+  * НИЖНЯЯ ЧАСТЬ СТРАНИЦ САЙТА
+  */
+
+/* FOOTER сайта */
+@use 'blocks/footer';
+
+/* Cтраница со Статьёй - " PageArticle" */
+@use 'blocks/pageArticle';
+
+/**
+ * ОБЩИЕ НАСТРОЙКИ ДЛЯ ВСЕХ БЛОКОВ
+ */
+
+html {
+  height: 100%;
+}
+
+body {
+  font-family: 'Lato', sans-serif;
+  font-weight: 400;
+  font-size: 14px;
+  height: 100%;
+}
+
+body::before {
+  content: '';
+  /* Фиксирует фон относительно viewport */
+  position: fixed;
+  top: 0;
+  left: 0;
+  /* Полная ширина видимой области */
+  width: 100vw;
+  /* Полная высота видимой области */
+  height: 100vh;
+  /* Путь к картинке background */
+  background-image: url('../images/background.png');
+  /* Масштабирует изображение, чтобы покрыть экран */
+  background-size: cover;
+  /* Без повторений */
+  background-repeat: no-repeat;
+  /* Центрирует изображение + сдвиг на 35%*/
+  background-position: center calc(35%);
+  /* Полупрозрачность, (0.0 - полностью прозрачно, 1.0 - непрозрачно) */
+  opacity: 0.8;
+  /* Размещает за контентом */
+  z-index: -1;
+}
+
+#app {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+}
+
+/* Метод прижать Футер к низу страницы */
+.main {
+  flex-grow: 1;
+}
+
+.container {
+  /* desktop */
+  // outline: 1px solid red;
+  margin: 0 auto;
+  width: 1140px; // ширина для Десктопа по макету
+
+  /* АДАПТИВ БЛОКОВ ДЛЯ РАЗНЫХ ДЕВАЙСОВ */
+
+  /* tablet */
+  // +40px для перестроения адаптива = 1180px
+  @media (max-width: $tablet_breakpoint) {
+    width: 736px; // ширина для Планшета по макету
+  }
+
+  /* phone */
+  // +32px для перестроения адаптива = 768px
+  @media (max-width: $phone_breakpoint) {
+    width: 360px; // ширина для Телефона по макету
+  }
+}
+
+/* Классы по умолчанию */
+
+/* Скрытая область */
+.hidden {
+  width: 1px;
+  height: 1px;
+  position: absolute;
+  left: -99999px;
+  margin: -1px;
+}

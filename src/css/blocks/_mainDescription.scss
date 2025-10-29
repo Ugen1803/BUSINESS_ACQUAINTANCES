@@ -1,0 +1,33 @@
+/* ПЕРЕМЕННЫЕ */
+@use '../variables' as *;
+
+/* МИКСИНЫ */
+@use '../mixins' as *;
+
+/**
+ * ОПИСАНИЕ главной страницы
+ */
+.main-description-wrap {
+  margin-top: 105px;
+  border-bottom: 1px solid #ffffff52;
+}
+
+.main-description-about {
+  margin: 60px 0 30px;
+  font-size: 23px;
+  line-height: 28px;
+  color: #fff;
+  text-align: center;
+
+  @media (max-width: $tablet_breakpoint) {
+    margin: 138px 16px 0 0;
+    font-size: 24px;
+    line-height: 29px;
+  }
+
+  @media (max-width: $phone_breakpoint) {
+    margin: 0;
+    font-size: 20px;
+    line-height: 24px;
+  }
+}
