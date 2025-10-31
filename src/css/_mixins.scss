@@ -19,14 +19,13 @@
 @mixin default-button() {
     cursor: pointer;
     text-decoration: none !important;
-    outline: 2px solid red;
+    outline: 1px solid red;
     border-radius: 7px;
     padding: 14px 38px;
     font-weight: normal;
     font-size: 16px;
     line-height: 19px;
-    color: white;
-    margin-top: 30px;
+    color: #ffffff;
 
     // Явно прозрачный фон
     background-color: transparent !important;
@@ -34,10 +33,9 @@
     &:hover {
         transition-property: background-color, transform;
         transition-duration: 0.3s;
-        outline: 2px solid #f16d7f;
-        color: black;
-
-        // !important для переопределения
-        background-color: $corporate_color !important;
+        outline: 1px solid #f16d7f;
+        color: black !important;
+        background-color: white !important; // !important для переопределения
+        // background-color: $corporate_color !important;
     }
 }

@@ -8,26 +8,44 @@
  * ОПИСАНИЕ главной страницы
  */
 .main-description-wrap {
-  margin-top: 105px;
+  margin-top: 95px;
   border-bottom: 1px solid #ffffff52;
+
+  @media (max-width: $tablet_breakpoint) {
+    margin-top: 90px;
+  }
+
+  @media (max-width: $phone_breakpoint) {
+    margin-top: 285px;
+  }
+
+}
+
+.main-description-name {
+  display: none; // Скрываем название на мобильных, чтобы сэкономить место
+
+  @media (max-width: $phone_breakpoint) {
+    display: block;
+    font-size: 43px;
+    line-height: 36px;
+    color: #fff;
+    text-align: center;
+  }
 }
 
 .main-description-about {
-  margin: 60px 0 30px;
   font-size: 23px;
   line-height: 28px;
   color: #fff;
   text-align: center;
 
   @media (max-width: $tablet_breakpoint) {
-    margin: 138px 16px 0 0;
-    font-size: 24px;
-    line-height: 29px;
+    font-size: 21px;
+    line-height: 24px;
   }
 
   @media (max-width: $phone_breakpoint) {
-    margin: 0;
-    font-size: 20px;
-    line-height: 24px;
+    font-size: 14px;
+    line-height: 16px;
   }
 }

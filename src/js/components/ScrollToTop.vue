@@ -1,7 +1,7 @@
 <template>
     <!-- Стрелка вверх, стилизированная Bootstrap -->
     <a href="#" ref="scrollBtn" class="btn btn-primary position-fixed d-none"
-        style="bottom: 140px; right: 6px; --bs-btn-font-size: 2.5rem; --bs-btn-active-bg: rgb(54, 42, 42); --bs-btn-active-border-color:rgb(54, 42, 42); z-index: 1000; border-radius: 50%; width: 50px; height: 50px; display: flex; align-items: center; justify-content: center;"
+        style="bottom: 140px; right: 18px; --bs-btn-font-size: 2.5rem; --bs-btn-active-bg: rgb(255 255 255 / 0%); --bs-btn-active-border-color: none; z-index: 1000; border-radius: 11px; width: 50px; height: 50px; display: flex; align-items: center; justify-content: center;"
         @click="scrollToTop">
         ↑
     </a>

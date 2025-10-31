@@ -5,6 +5,9 @@
     <div class="container">
 
       <div class="main-description-wrap">
+        <h3 class="main-description-name">
+          Деловые знакомства
+        </h3>
         <h3 class="main-description-about">
           Сообщество для профессионального нетворкинга. <br />
           Полезные статьи о психологии, партнерстве и эффективном общении.

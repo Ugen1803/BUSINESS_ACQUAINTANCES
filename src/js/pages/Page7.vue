@@ -24,7 +24,7 @@
             <div class="page-article-wrap">
                 <h3 class="el-page-article-heading">
                     ❤️<br>
-                    «Как влюбить в себя кого угодно?»
+                    Как влюбить в себя кого угодно?
                 </h3>
                 <p class="el-page-article-description">
                     Секреты счастливой любви.<br>

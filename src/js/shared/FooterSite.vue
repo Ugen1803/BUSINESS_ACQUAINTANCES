@@ -7,11 +7,11 @@
       <!-- Присоединиться к чат-боту -->
       <div class="join-wrap">
         <h2 class="join-name">
-          Готовы начать?
-        </h2>
-        <p class="join-about">
           Присоединяйтесь к сообществу деловых знакомств в Telegram
-        </p>
+        </h2>
+        <!-- <p class="join-about">
+          Присоединяйтесь к сообществу деловых знакомств в Telegram
+        </p> -->
         <div class="btn-connect">
           <a class="btn-link" href="https://t.me/business_dating_bot" target="_blank" rel="noopener noreferrer">
             Открыть чат-бот
@@ -57,4 +57,3 @@
 
 <script setup name="FooterSite">
 </script>
-

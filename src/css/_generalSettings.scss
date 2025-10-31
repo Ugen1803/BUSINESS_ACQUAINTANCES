@@ -1,0 +1,93 @@
+/* ПЕРЕМЕННЫЕ */
+@use '../css/variables' as *;
+
+/**
+ * ОБЩИЕ НАСТРОЙКИ ДЛЯ ВСЕХ БЛОКОВ
+ */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+// Восстанавливаем для списков
+ul,
+ol {
+    padding-left: 20px; // Или что-то своё
+}
+
+html {
+    height: 100%;
+}
+
+body {
+    font-family: 'Lato', sans-serif;
+    font-weight: 400;
+    font-size: 14px;
+    height: 100%;
+}
+
+body::before {
+    content: '';
+    /* Фиксирует фон относительно viewport */
+    position: fixed;
+    top: 0;
+    left: 0;
+    /* Полная ширина видимой области */
+    width: 100vw;
+    /* Полная высота видимой области */
+    height: 100vh;
+    /* Путь к картинке background */
+    background-image: url('../images/background.png');
+    /* Масштабирует изображение, чтобы покрыть экран */
+    background-size: cover;
+    /* Без повторений */
+    background-repeat: no-repeat;
+    /* Центрирует изображение + сдвиг на ...%*/
+    background-position: center calc(0%);
+    /* Полупрозрачность, (0.0 - полностью прозрачно, 1.0 - непрозрачно) */
+    opacity: 0.9;
+    /* Размещает за контентом */
+    z-index: -1;
+}
+
+#app {
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+}
+
+/* Метод прижать Футер к низу страницы */
+.main {
+    flex-grow: 1;
+}
+
+/* АДАПТИВ БЛОКОВ ДЛЯ РАЗНЫХ ДЕВАЙСОВ */
+.container {
+    /* desktop */
+    width: 1140px; // ширина для Десктопа по макету
+    margin: 0 auto;
+    // outline: 1px solid red;
+
+
+    /* tablet */
+    // +40px для перестроения адаптива = 1180px
+    @media (max-width: $tablet_breakpoint) {
+        width: 736px; // ширина для Планшета по макету
+    }
+
+    /* phone */
+    // +32px для перестроения адаптива = 768px
+    @media (max-width: $phone_breakpoint) {
+        width: 360px; // ширина для Телефона по макету
+    }
+}
+
+/* Скрытая область */
+.hidden {
+    width: 1px;
+    height: 1px;
+    position: absolute;
+    left: -99999px;
+    margin: -1px;
+}

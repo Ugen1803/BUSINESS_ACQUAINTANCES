@@ -7,7 +7,9 @@
     <HeaderSite />
 
     <!-- MAIN - Главная станица -->
-    <RouterView />
+    <main class="main">
+      <RouterView />
+    </main>
 
     <!-- FOOTER - Подвал сайта -->
     <FooterSite />

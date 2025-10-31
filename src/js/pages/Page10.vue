@@ -24,7 +24,7 @@
             <div class="page-article-wrap">
                 <img src="../../images/section-promo/loading.gif" alt="loading" />
                 <h3 class="el-page-article-heading">
-                    Статья скоро будет загружена
+                    Статья готовится к публикации. Следите за обновлениями!
                 </h3>
             </div>
 
