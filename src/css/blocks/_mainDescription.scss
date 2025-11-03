@@ -16,7 +16,8 @@
   }
 
   @media (max-width: $phone_breakpoint) {
-    margin-top: 285px;
+    margin-top: 225px;
+    border-bottom: none;
   }
 
 }
@@ -45,7 +46,8 @@
   }
 
   @media (max-width: $phone_breakpoint) {
-    font-size: 14px;
-    line-height: 16px;
+    margin-top: 60px;
+    font-size: 16px;
+    line-height: 18px;
   }
 }

@@ -1,0 +1,71 @@
+/* ПЕРЕМЕННЫЕ */
+@use '../variables' as *;
+
+/* МИКСИНЫ */
+@use '../mixins' as *;
+
+/**
+ * Offer - Договор публичной оферты
+ */
+
+.page-article-text {
+  font-family: Arial, sans-serif;
+  line-height: 1.6;
+  color: #333;
+  max-width: 800px;
+  margin: 0 auto;
+}
+
+.offer-intro,
+.offer-section {
+  margin-bottom: 2rem;
+}
+
+.offer-intro h4,
+.offer-section h4 {
+  font-size: 1.5rem;
+  font-weight: bold;
+  /* Синий для заголовков — можно изменить */
+  color: #007bff;
+  margin-bottom: 1rem;
+}
+
+.offer-section h5 {
+  font-size: 1.2rem;
+  font-weight: bold;
+  margin-top: 1.5rem;
+  margin-bottom: 0.5rem;
+}
+
+.offer-list {
+  list-style-type: disc;
+  margin-left: 2rem;
+  margin-bottom: 1rem;
+}
+
+.offer-list li {
+  margin-bottom: 0.5rem;
+}
+
+a {
+  color: #007bff;
+  text-decoration: underline;
+}
+
+a:hover {
+  color: #0056b3;
+}
+
+/* Стили для кликабельного текста (чтобы выглядело как ссылка) */
+.clickable-link {
+  /* Синий цвет, как у ссылок */
+  color: #007bff;
+  /* Курсор-указатель */
+  cursor: pointer;
+  text-decoration: underline;
+
+  /* Темнее при наведении */
+  &:hover {
+    color: #0056b3;
+  }
+}

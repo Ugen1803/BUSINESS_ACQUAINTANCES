@@ -24,31 +24,7 @@ body {
     font-family: 'Lato', sans-serif;
     font-weight: 400;
     font-size: 14px;
-    height: 100%;
-}
-
-body::before {
-    content: '';
-    /* Фиксирует фон относительно viewport */
-    position: fixed;
-    top: 0;
-    left: 0;
-    /* Полная ширина видимой области */
-    width: 100vw;
-    /* Полная высота видимой области */
-    height: 100vh;
-    /* Путь к картинке background */
-    background-image: url('../images/background.png');
-    /* Масштабирует изображение, чтобы покрыть экран */
-    background-size: cover;
-    /* Без повторений */
-    background-repeat: no-repeat;
-    /* Центрирует изображение + сдвиг на ...%*/
-    background-position: center calc(0%);
-    /* Полупрозрачность, (0.0 - полностью прозрачно, 1.0 - непрозрачно) */
-    opacity: 0.9;
-    /* Размещает за контентом */
-    z-index: -1;
+    min-height: 100vh; // Чтобы страница всегда занимала минимум высоту viewport
 }
 
 #app {
@@ -68,7 +44,6 @@ body::before {
     width: 1140px; // ширина для Десктопа по макету
     margin: 0 auto;
     // outline: 1px solid red;
-
 
     /* tablet */
     // +40px для перестроения адаптива = 1180px

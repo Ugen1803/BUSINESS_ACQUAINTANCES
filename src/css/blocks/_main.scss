@@ -8,12 +8,45 @@
  * ГЛАВНАЯ СТРАНИЦА САЙТА - "MainPage"
  */
 
+.page-wrapper::before {
+    content: '';
+    /* Фиксирует фон относительно viewport */
+    position: fixed;
+    top: 0;
+    left: 0;
+    /* Полная ширина видимой области */
+    width: 100vw;
+    /* Полная высота видимой области */
+    height: 100vh;
+    /* Путь к картинке background,
+        Центрирует изображение + сдвиг на ...%,
+        Масштабирует изображение,
+        чтобы покрыть экран Без повторений */
+    background: url('../images/background.png') center calc(0%) / cover no-repeat;
+    /* Полупрозрачность, (0.0 - полностью прозрачно, 1.0 - непрозрачно) */
+    opacity: 0.9;
+    /* Размещает за контентом */
+    z-index: -1;
+
+    @media (max-width: $tablet_breakpoint) {
+        /* Градиентный цвет background */
+        background: url('../images/background.png') center calc(12%) / contain no-repeat,
+            linear-gradient(to bottom, #000000, rgb(38 7 7));
+    }
+
+    @media (max-width: $phone_breakpoint) {
+        /* Градиентный цвет background */
+        background: url('../images/background.png') center calc(32%) / contain no-repeat,
+            linear-gradient(to bottom, #000000, rgb(38 7 7));
+    }
+}
+
 /* Раздел СТАТЬИ */
 .articles {
     margin-top: 100px;
 
     @media (max-width: $phone_breakpoint) {
-        margin-top: 250px;
+        margin-top: 480px;
     }
 }
 
@@ -79,10 +112,74 @@
 
 }
 
+/* Swiper карусель */
+.swiper-container {
+    width: 100%;
+    /* Ограничь ширину для мобильных */
+    max-width: 600px;
+    margin: 0 auto;
+}
+
+/* Фиксированная высота слайдов для карусели (мобильный вид) */
+.my-swiper .swiper-slide {
+    /* Фиксированную высоту, Подгони под дизайн */
+    height: 124px;
+}
+
+.my-swiper {
+    width: 98%;
+    height: auto;
+}
+
+/* Стили для карточек в слайдах Swiper */
+.swiper-slide-card {
+    display: block;
+    background-color: rgba(255, 255, 255, 0.151);
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    border-radius: 7px;
+    text-align: center;
+    text-decoration: none;
+    /* Фиксированную высоту, Подгони под дизайн */
+    height: 100px;
+    /* Обрезает контент, если он выходит за пределы высоты */
+    overflow: hidden;
+    /* Добавили box-shadow в transition для плавности */
+    transition: transform 1s, box-shadow 1s;
+    padding: 10px;
+
+    &:hover {
+        /* Рамка через box-shadow */
+        box-shadow: 0 0 0 1px $corporate_color, 0 2px 4px rgba(0, 0, 0, 0.1);
+    }
+}
+
+/* Подстройка навигации Swiper (стрелки) */
+.my-swiper .swiper-button-next,
+.my-swiper .swiper-button-prev {
+    /* Белый цвет для контраста */
+    color: #ffffff00;
+}
+
+/* Отступ пагинации от слайдов (снизу) */
+.my-swiper .swiper-pagination {
+    /* Сдвигаем пагинацию выше (ближе к слайдам). !important для переопределения Bootstrap */
+    bottom: -5px !important;
+}
+
+/* Подстройка пагинации Swiper (точки) */
+/* Красный цвет для неактивных точек */
+.my-swiper .swiper-pagination-bullet {
+    background-color: #f00d0d;
+}
+
+.my-swiper .swiper-pagination-bullet-active {
+    background-color: #fff;
+}
+
+/* Статьи */
 .article-card {
     background-color: rgba(255, 255, 255, 0.151);
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-    outline: 1px solid rgba(255, 0, 0, 0.5);
     border-radius: 7px;
     text-align: center;
     text-decoration: none;
@@ -92,8 +189,7 @@
 
     &:hover {
         transform: scale(1.05);
-        // background-color: $corporate_color;
-        outline: 1px solid #f16d7f;
+        outline: 1px solid $corporate_color;
     }
 }
 
@@ -139,14 +235,12 @@
     @media (max-width: $phone_breakpoint) {
         gap: 10px;
     }
-
 }
 
 .el-articles {
     width: 700px;
     background-color: rgba(255, 255, 255, 0.151);
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-    outline: 1px solid rgba(255, 0, 0, 0.5);
     border-radius: 7px;
     list-style: none;
     text-align: center;
@@ -155,12 +249,11 @@
 
     &:hover {
         transform: scale(1.1);
-        // background-color: $corporate_color;
-        outline: 1px solid #f16d7f;
+        outline: 1px solid $corporate_color;
     }
 
     @media (max-width: $phone_breakpoint) {
-        width: 273px;
+        width: 385px;
     }
 
 }
@@ -175,7 +268,7 @@
 
     /* Дополнительно: если это кнопка, добавь стили для интерактива */
     text-decoration: none;
-    padding: 1rem;
+    padding: 10px;
 }
 
 .el-articles-number {
@@ -201,7 +294,12 @@
     transition-duration: 1s;
 
     &:hover {
-        color: black;
+        color: $corporate_color;
+    }
+
+    @media (max-width: $phone_breakpoint) {
+        font-size: 16px;
+        line-height: 22px
     }
 
 }
@@ -214,6 +312,12 @@
     font-size: 16px;
     color: #ffffff;
     margin-bottom: 0;
+    margin-top: 8px;
+
+    @media (max-width: $phone_breakpoint) {
+        font-size: 14px;
+        line-height: 20px;
+    }
 }
 
 .shows-all {

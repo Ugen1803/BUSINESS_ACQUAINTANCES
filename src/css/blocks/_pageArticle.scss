@@ -8,6 +8,25 @@
  * Cтраница со Статьёй - " PageArticle"
  */
 
+/* Оформление background конкретно страницы со статьёй */
+.page-articles::before {
+    content: '';
+    /* Фиксирует фон относительно viewport */
+    position: fixed;
+    top: 0;
+    left: 0;
+    /* Полная ширина видимой области */
+    width: 100vw;
+    /* Полная высота видимой области */
+    height: 100vh;
+    /* Градиентный цвет background */
+    background: linear-gradient(to bottom, #000000, rgb(38 7 7));
+    /* Полупрозрачность, (0.0 - полностью прозрачно, 1.0 - непрозрачно) */
+    opacity: 1;
+    /* Размещает за контентом */
+    z-index: -1;
+}
+
 /* Навигация хлебные крошки*/
 .breadcrumb {
     margin-top: 120px;
@@ -26,7 +45,7 @@
         }
 
         & :hover {
-            color: $corporate_color;
+            color: #fff;
         }
 
         &::after {

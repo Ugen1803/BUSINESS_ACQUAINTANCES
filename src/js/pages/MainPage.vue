@@ -22,15 +22,41 @@
             Ежедневно обновляемая подборка материалов о психологии, партнерстве и личностном росте
           </p>
 
-          <!-- Показываем сетку только если есть данные -->
+          <!-- Показываем сетку ИЗБРАННЫЕ статьи только если есть данные -->
           <div v-if="carousel.length === 0" class="loading">Загрузка статей...</div>
+
+          <!-- Карусель Swiper на мобильном (≤768px) -->
+          <div v-else-if="isMobile" class="swiper-container">
+            <!-- Добавили EffectCoverflow -->
+            <!-- Изменено на 1.3 для показа части соседних слайдов -->
+            <!-- Увеличено расстояние для "выглядывания" -->
+            <!-- Центрируем активный слайд -->
+            <!-- Включаем 3D-эффект coverflow -->
+            <swiper :key="carouselKey" :modules="[Navigation, Pagination, Autoplay, EffectCoverflow]" :navigation="true"
+              :autoplay="{ delay: 3000, disableOnInteraction: false }" :pagination="{ clickable: true }"
+              :slidesPerView="1.6" :spaceBetween="10" :centeredSlides="true" :effect="'coverflow'" :coverflowEffect="{
+                rotate: 120, // Угол поворота боковых слайдов (в градусах; уменьши до 0, если не нужен поворот)
+                stretch: 0, // Растяжение (0 для симметрии)
+                depth: 2000, // Глубина 3D-эффекта (больше — сильнее)
+                modifier: 0.5, // Модификатор масштаба (играй с 0.5–2 для настройки)
+                slideShadows: true // Тени для реализма (можно убрать, если мешает)
+              }" :loop="true" class="my-swiper">
+              <swiper-slide v-for="(article, index) in carousel" :key="article.id">
+                <router-link :to="article.link" class="swiper-slide-card">
+                  <h4 class="el-articles-name">{{ article.name }}</h4>
+                  <p class="el-articles-about">{{ article.about }}</p>
+                </router-link>
+              </swiper-slide>
+            </swiper>
+          </div>
+
+          <!-- Сетка 3x2 на десктопе (>768px) -->
           <div v-else class="articles-grid">
-            <router-link :to="article.link" :key="index" class="article-card" v-for="(article, index) in carousel">
+            <router-link :to="article.link" :key="article.id" class="article-card" v-for="(article, index) in carousel">
               <h4 class="el-articles-name">{{ article.name }}</h4>
               <p class="el-articles-about">{{ article.about }}</p>
             </router-link>
           </div>
-
         </div>
 
         <!-- ВСЕ статьи - Список -->
@@ -71,8 +97,14 @@
 // Блок ОПИСАНИЕ главной страницы
 import MainDescription from '../shared/MainDescription.vue';
 
-// Массив Названий для статей
-import { ref, computed, onMounted } from 'vue';
+// Импорты Swiper для карусели
+import { ref, computed, onMounted, onUnmounted } from 'vue';
+import { Swiper, SwiperSlide } from 'swiper/vue';
+import { Navigation, Pagination, Autoplay, EffectCoverflow } from 'swiper/modules';
+import 'swiper/css';
+import 'swiper/css/navigation';
+import 'swiper/css/pagination';
+import 'swiper/css/effect-coverflow';
 
 const showAll = ref(false);
 const articles = ref([
@@ -101,55 +133,72 @@ const articles = ref([
 // Реактивная переменная для сетки
 const carousel = ref([]);
 
-// Функция загрузки сетки с ежедневным сдвигом
+// Переменная для определения мобильного режима (≤768px)
+const isMobile = ref(false);
+
+// Ключ для принудительного обновления Swiper
+const carouselKey = ref(0);
+
+// Избранные ID статей
+const favoriteIds = [1, 7, 10, 17, 18, 20];
+
+// Функция для проверки ширины экрана
+const checkMobile = () => {
+  isMobile.value = window.innerWidth <= 768;
+};
+
+// Функция загрузки сетки с ежедневным сдвигом (ВРЕМЕННО: сдвиг при КАЖДОЙ перезагрузке для теста!)
 const loadCarousel = () => {
   const stored = JSON.parse(localStorage.getItem('articles') || '[]');
   if (stored.length > 0) {
     articles.value = stored;
   }
 
-  const today = new Date().toDateString(); // Сегодняшняя дата (строка)
-  let lastUpdate = localStorage.getItem('lastUpdate');
+  const favoriteArticles = articles.value.filter(article => favoriteIds.includes(article.id));
+
+  if (favoriteArticles.length === 0) {
+    carousel.value = [];
+    return;
+  }
+
+  console.log('Favorite articles:', favoriteArticles.map(a => a.id));
+
+  // ВРЕМЕННО: убрана проверка даты — сдвиг при каждом вызове (для теста)
   let currentIndex = parseInt(localStorage.getItem('currentIndex') || '0');
+  currentIndex = (currentIndex + 1) % favoriteArticles.length; // Всегда сдвигаем на 1
+  localStorage.setItem('currentIndex', currentIndex.toString());
 
-  console.log('Before logic - Today:', today, 'Last update:', lastUpdate, 'Current index:', currentIndex);
+  console.log('Current index after shift:', currentIndex);
 
-  // Логика сдвига
-  if (lastUpdate === null) {
-    // Первый запуск: начинаем с 0, сохраняем дату
-    currentIndex = 0;
-    lastUpdate = today;
-    localStorage.setItem('currentIndex', currentIndex.toString());
-    localStorage.setItem('lastUpdate', lastUpdate);
-  } else if (lastUpdate !== today) {
-    // Новый день: сдвигаем индекс на 1 циклически
-    currentIndex = (currentIndex + 1) % articles.value.length;
-    localStorage.setItem('currentIndex', currentIndex.toString());
-    localStorage.setItem('lastUpdate', today);
-  }
-  // Если lastUpdate == today, ничего не делаем (используем сохраненный currentIndex)
-
-  console.log('After logic - Current index:', currentIndex, 'Last update:', lastUpdate);
-
-  // Берем 6 статей начиная с currentIndex, циклически
-  const endIndex = (currentIndex + 6) % articles.value.length;
+  const numToShow = Math.min(6, favoriteArticles.length);
+  const endIndex = (currentIndex + numToShow) % favoriteArticles.length;
   if (endIndex > currentIndex) {
-    carousel.value = articles.value.slice(currentIndex, endIndex);
+    carousel.value = favoriteArticles.slice(currentIndex, endIndex);
   } else {
-    // Обертка: от currentIndex до конца + от начала до endIndex
-    carousel.value = [...articles.value.slice(currentIndex), ...articles.value.slice(0, endIndex)];
+    carousel.value = [...favoriteArticles.slice(currentIndex), ...favoriteArticles.slice(0, endIndex)];
   }
 
-  console.log('Carousel articles:', carousel.value.map(a => a.id));
+  // Принудительно обновляем ключ Swiper
+  carouselKey.value++;
+
+  console.log('Carousel articles (favorites only):', carousel.value.map(a => a.id));
 };
+
 // Кнопка для переключения видимости статей
 const buttonText = computed(() => showAll.value ? 'Свернуть статьи' : 'Показать ещё статьи');
 const toggleShowAll = () => {
   showAll.value = !showAll.value;
 };
 
-// Вызов обновления при монтировании
+// Вызов проверки мобильного режима при монтировании и изменении размера окна
 onMounted(() => {
   loadCarousel();
+  checkMobile();
+  window.addEventListener('resize', checkMobile);
+});
+
+// даляем слушатель при размонтировании
+onUnmounted(() => {
+  window.removeEventListener('resize', checkMobile);
 });
 </script>

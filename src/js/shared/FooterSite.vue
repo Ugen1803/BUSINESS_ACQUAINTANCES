@@ -22,6 +22,13 @@
       <div class="footer-wrap">
         <p class="p-footer">© 2025 Все права защищены</p>
 
+        <!-- Договор публичной оферты -->
+        <div class="offer-wrap">
+          <router-link to="/offer" style="text-decoration: none;">
+            <p class="offer-about">Договор публичной оферты</p>
+          </router-link>
+        </div>
+
         <!-- Элементы способов связи -->
         <ul class="social-network-ico">
 

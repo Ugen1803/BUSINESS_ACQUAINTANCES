@@ -10,6 +10,7 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 import 'bootstrap/dist/js/bootstrap.bundle.min.js';
 /* pages */
 import MainPage from './pages/MainPage.vue';
+import Offer from './pages/Offer.vue';
 import Page1 from './pages/Page1.vue';
 import Page2 from './pages/Page2.vue';
 import Page3 from './pages/Page3.vue';
@@ -49,13 +50,18 @@ const router = createRouter({  // Экземпляр:
   // history: createWebHistory(), // Более мощный и гибкий способ настроить историю маршрутизации
   history: createWebHashHistory(), // Метод управления историей маршрутов Vue Router
   components: {
-    MainPage, Page1, Page2, Page3, Page4, Page5, Page6, Page7, Page8, Page9, Page10, Page11, Page12, Page13, Page14, Page15, Page16, Page17, Page18, Page19, Page20,
+    MainPage, Offer, Page1, Page2, Page3, Page4, Page5, Page6, Page7, Page8, Page9, Page10, Page11, Page12, Page13, Page14, Page15, Page16, Page17, Page18, Page19, Page20,
   }, // Используемые страницы-компоненты
   routes: [  // Маршруты между страницами:
     {
       path: '/',
       name: 'main-page',
       component: () => import('@/pages/MainPage.vue'),
+    },
+    {
+      path: '/offer',
+      name: 'offer-page',
+      component: () => import('@/pages/Offer.vue'),
     },
     {
       path: '/page1',
@@ -146,11 +152,6 @@ const router = createRouter({  // Экземпляр:
       path: '/page18',
       name: 'page-18',
       component: () => import('@/pages/Page18.vue')
-    },
-    {
-      path: '/page19',
-      name: 'page-19',
-      component: () => import('@/pages/Page19.vue')
     },
     {
       path: '/page19',

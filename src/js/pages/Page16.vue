@@ -14,9 +14,9 @@
                     <li class="breadcrumb-item">
                         <router-link to="/">ГЛАВНАЯ СТРАНИЦА</router-link>
                     </li>
-                    <li class="breadcrumb-item-active" aria-current="page">
+                    <!-- <li class="breadcrumb-item-active" aria-current="page">
                         СТАТЬЯ №16
-                    </li>
+                    </li> -->
                 </ol>
             </nav>
 
