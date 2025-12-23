@@ -6,19 +6,39 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
+  <!-- Мета-описание моего сайта -->
+  <meta name="description" content="Лучший сайт для Деловых знакомств, который работает на вас.
+    Присоединяйтесь к сообществу профессионального нетворкинга и находите надёжных партнёров с проверенными профилями">
+
+  <!-- Безопасность -->
+  <!-- <meta http-equiv="Content-Security-Policy"
+    content="default-src 'self'; script-src 'self' https://www.googletagmanager.com; style-src 'self' 'unsafe-inline';"> -->
+
+  <!-- Название сайта -->
   <title>BUSINESS ACQUAINTANCES</title>
 
   <!-- Подключение шрифтов -->
-  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <!-- preconnect (для ускорения соединения с серверами Google Fonts) -->
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preload"
+    href="https://fonts.googleapis.com/css2?family=Lato:ital,wght@0,300;0,400;0,700;0,900;1,400&display=swap" as="style"
+    onload="this.onload=null;this.rel='stylesheet'">
+  <!-- Fallback -->
+  <noscript>
+    <link rel="stylesheet"
+      href="https://fonts.googleapis.com/css2?family=Lato:ital,wght@0,300;0,400;0,700;0,900;1,400&display=swap">
+  </noscript>
 
-  <!-- Подключение стилей -->
-  <link rel="stylesheet"
-    href="https://fonts.googleapis.com/css2?family=Lato:ital,wght@0,300;0,400;0,700;0,900;1,400&display=swap" />
+  <!-- Подключение FontAwesome-иконок -->
+  <!-- preconnect (для ускорения соединения с серверами FontAwesome) -->
+  <link rel="preconnect" href="https://ka-f.fontawesome.com" crossorigin />
+  <!-- Асинхронная загрузка FontAwesome (стандартный defer из FA доки) -->
+  <script defer src="https://kit.fontawesome.com/affe9ed728.js" crossorigin="anonymous"></script>
 
-  <!-- Подключение иконок -->
+  <!-- Подключение своих иконок -->
+  <link rel="icon" href="images/header/brand-ico.webp" type="image/webp" />
   <link rel="icon" href="images/header/brand-ico.png" type="image/png" />
-  <script defer src="https://kit.fontawesome.com/cb68bb75f4.js" crossorigin="anonymous"></script>
 </head>
 
 <body>

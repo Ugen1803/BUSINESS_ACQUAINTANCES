@@ -13,19 +13,16 @@
  */
 
 .footer {
-  height: 240px;
   margin-top: 30px;
   width: 100%;
   background-color: black;
   opacity: 0.8;
 
   @media (max-width: $tablet_breakpoint) {
-    height: 240px;
     margin-top: 30px;
   }
 
   @media (max-width: $phone_breakpoint) {
-    height: 220px;
     margin-top: 25px;
   }
 
@@ -40,23 +37,16 @@
 
 .join-name {
   margin: 10px 0 30px;
-  font-weight: 600;
+  font-weight: 400;
   font-size: 30px;
-  line-height: 50px;
+  line-height: 40px;
   color: #fff;
-
-  @media (max-width: $tablet_breakpoint) {
-    margin: 10px 0 30px;
-    font-weight: 600;
-    font-size: 30px;
-    line-height: 50px;
-  }
+  text-align: center;
 
   @media (max-width: $phone_breakpoint) {
     margin: 10px 0 10px;
-    font-weight: 300;
-    font-size: 14px;
-    line-height: 30px;
+    font-size: 19px;
+    line-height: 29px;
   }
 }
 

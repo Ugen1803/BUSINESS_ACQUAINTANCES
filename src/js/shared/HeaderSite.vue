@@ -1,41 +1,44 @@
 <!-- HEADER и МЕНЮ сайта -->
 
 <template>
-  <header class="header">
-    <div class="container">
-      <!-- HEADER и МЕНЮ сайта -->
-      <nav class="header-nav">
+  <div class="container">
 
-        <!-- Меню сайта -->
-        <ul class="header-col">
+    <!-- HEADER и МЕНЮ сайта -->
+    <nav class="header-nav">
 
-          <!-- Лого Бренда -->
-          <li class="brand-btn">
-            <router-link to="/">
-              <img class="brand-ico" src="images/header/brand-ico.png" alt="brand" />
-            </router-link>
-          </li>
+      <!-- Меню сайта -->
+      <ul class="header-col">
 
-          <!-- Название Бренда -->
-          <li class="namebrand-btn">
-            <a class="namebrand-link" href="https://t.me/business_dating_bot" target="_blank" rel="noopener noreferrer">
-              <div class="namebrand-heading">
-                Деловые знакомства
-              </div>
-            </a>
-          </li>
+        <!-- Лого Бренда -->
+        <li class="brand-btn">
+          <router-link to="/">
+            <picture>
+              <source srcset="images/header/brand-ico.webp" type="image/webp">
+              <img class="brand-ico" src="images/header/brand-ico.png" alt="brand-ico" width="55" height="55">
+            </picture>
+            <!-- <img src="images/header/brand-ico.webp" alt="brand-ico" class="brand-ico" width="55" height="55"> -->
+          </router-link>
+        </li>
 
-          <!-- Кнопка Присоединяйся к нам -->
-          <li class="btn-connect">
-            <a class="btn-link show" href="https://t.me/business_dating_bot" target="_blank" rel="noopener noreferrer">
-              Присоединяйтесь к нам
-            </a>
-          </li>
+        <!-- Название Бренда -->
+        <li class="namebrand-btn">
+          <a class="namebrand-link" href="https://t.me/business_dating_bot" target="_blank" rel="noopener noreferrer">
+            <h1 class="namebrand-heading">
+              Деловые знакомства
+            </h1>
+          </a>
+        </li>
 
-        </ul>
-      </nav>
-    </div>
-  </header>
+        <!-- Кнопка Присоединяйся к нам -->
+        <li class="btn-connect">
+          <a class="btn-link" href="https://t.me/business_dating_bot" target="_blank" rel="noopener noreferrer">
+            Присоединиться
+          </a>
+        </li>
+
+      </ul>
+    </nav>
+  </div>
 </template>
 
 <script setup name="HeaderSite">

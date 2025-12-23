@@ -31,3 +31,30 @@
 
 /* Cтраница со Статьёй - " PageArticle" */
 @use 'blocks/pageArticle';
+
+/**
+ * FONTAWESOME optimization (для Lighthouse)
+ * Эти правила переопределяют font-display с block на swap, снижая FCP на ~60 мс.
+ * Добавьте только для используемых шрифтов FA (brands, solid, regular).
+ * Обновите версию v7x на актуальную из вашего FA kit.
+ */
+
+// Если используете Brands иконки, добавьте это:
+@font-face {
+    font-family: "Font Awesome 7 Brands";
+    font-display: swap;
+    /* Фикс для Lighthouse (FOIT -> FOUT) */
+    src: url("https://ka-f.fontawesome.com/releases/v7.1.0/webfonts/free-fa-brands-400.woff2") format("woff2"),
+        url("https://ka-f.fontawesome.com/releases/v7.1.0/webfonts/free-fa-brands-400.ttf") format("truetype");
+}
+
+// // Если используете Solid иконки (большинство случаев), добавьте это:
+// @font-face {
+//     font-family: "Font Awesome 7 Free";
+//     font-display: swap; // Фикс для Lighthouse (FOIT -> FOUT)
+//     src: url("https://ka-f.fontawesome.com/releases/v7.1.0/webfonts/fa-solid-900.woff2") format("woff2"),
+//         url("https://ka-f.fontawesome.com/releases/v7.1.0/webfonts/fa-solid-900.ttf") format("truetype");
+// }
+
+// Если используете Regular иконки — добавьте аналогично для fa-regular-400.woff2
+// Добавить другие шрифты (woff для IE) только если поддерживаете старые браузеры.

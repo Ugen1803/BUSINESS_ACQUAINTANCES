@@ -8,42 +8,91 @@
  * ГЛАВНАЯ СТРАНИЦА САЙТА - "MainPage"
  */
 
-.page-wrapper::before {
-    content: '';
-    /* Фиксирует фон относительно viewport */
+// .page-wrapper::before {
+//     content: '';
+//     /* Фиксирует фон относительно viewport */
+//     position: fixed;
+//     top: 0;
+//     left: 0;
+//     /* Полная ширина видимой области */
+//     width: 100vw;
+//     /* Полная высота видимой области */
+//     height: 100vh;
+//     /* Путь к картинке background,
+//         Центрирует изображение + сдвиг на ...%,
+//         Масштабирует изображение,
+//         чтобы покрыть экран Без повторений */
+//     background: url('../images/background.png') center calc(0%) / cover no-repeat;
+//     /* Полупрозрачность, (0.0 - полностью прозрачно, 1.0 - непрозрачно) */
+//     opacity: 0.9;
+//     /* Размещает за контентом */
+//     z-index: -1;
+
+//     @media (max-width: $tablet_breakpoint) {
+//         /* Градиентный цвет background */
+//         background: url('../images/background.png') center calc(12%) / contain no-repeat,
+//             // linear-gradient(to bottom, #000000, rgb(38 7 7));
+//             linear-gradient(to bottom, #000000, rgb(105 44 44));
+//     }
+
+//     @media (max-width: $phone_breakpoint) {
+//         /* Градиентный цвет background */
+//         background: url('../images/background.png') center calc(32%) / contain no-repeat,
+//             // linear-gradient(to bottom, #000000, rgb(38 7 7));
+//             linear-gradient(to bottom, #000000, rgb(105 44 44));
+//     }
+// }
+
+// Новый контейнер для фона (имитирует ::before)
+.background-container {
     position: fixed;
     top: 0;
     left: 0;
-    /* Полная ширина видимой области */
     width: 100vw;
-    /* Полная высота видимой области */
     height: 100vh;
-    /* Путь к картинке background,
-        Центрирует изображение + сдвиг на ...%,
-        Масштабирует изображение,
-        чтобы покрыть экран Без повторений */
-    background: url('../images/background.png') center calc(0%) / cover no-repeat;
-    /* Полупрозрачность, (0.0 - полностью прозрачно, 1.0 - непрозрачно) */
-    opacity: 0.9;
-    /* Размещает за контентом */
-    z-index: -1;
+    z-index: -1; // За контентом
 
-    @media (max-width: $tablet_breakpoint) {
-        /* Градиентный цвет background */
-        background: url('../images/background.png') center calc(12%) / contain no-repeat,
-            linear-gradient(to bottom, #000000, rgb(38 7 7));
+    // Для десктопа: только изображение (без градиента)
+    // Градиент добавится в медиа-запросах ниже
+}
+
+// Стили для <img> (имитирует background в ::before)
+.background-img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover; // Эквивалент background-size: cover
+    object-position: center calc(0%); // Эквивалент background-position: center calc(0%)
+    opacity: 0.9; // Полупрозрачность
+}
+
+@media (max-width: $tablet_breakpoint) {
+    .background-container {
+        // Градиент как background (под изображением)
+        background: linear-gradient(to bottom, #000000, rgb(105 44 44));
     }
 
-    @media (max-width: $phone_breakpoint) {
-        /* Градиентный цвет background */
-        background: url('../images/background.png') center calc(32%) / contain no-repeat,
-            linear-gradient(to bottom, #000000, rgb(38 7 7));
+    .background-img {
+        object-fit: contain; // Эквивалент background-size: contain
+        object-position: center calc(12%); // Эквивалент background-position: center calc(12%)
+    }
+}
+
+@media (max-width: $phone_breakpoint) {
+
+    // Градиент остаётся (из tablet)
+    .background-img {
+        object-position: center calc(32%); // Эквивалент background-position: center calc(32%)
+        // object-fit: contain уже задан выше
     }
 }
 
 /* Раздел СТАТЬИ */
 .articles {
-    margin-top: 100px;
+    margin-top: 90px;
+
+    @media (max-width: $tablet_breakpoint) {
+        margin-top: 70px;
+    }
 
     @media (max-width: $phone_breakpoint) {
         margin-top: 480px;
@@ -58,6 +107,7 @@
     line-height: 36px;
     color: #fff;
     text-align: center;
+    display: none;
 
     @media (max-width: $tablet_breakpoint) {
         font-size: 30px;
@@ -65,6 +115,7 @@
     }
 
     @media (max-width: $phone_breakpoint) {
+        display: block;
         font-size: 20px;
         line-height: 24px;
     }
@@ -109,7 +160,6 @@
         grid-template-rows: auto;
         gap: 10px;
     }
-
 }
 
 /* Swiper карусель */
@@ -120,14 +170,8 @@
     margin: 0 auto;
 }
 
-/* Фиксированная высота слайдов для карусели (мобильный вид) */
-.my-swiper .swiper-slide {
-    /* Фиксированную высоту, Подгони под дизайн */
-    height: 124px;
-}
-
 .my-swiper {
-    width: 98%;
+    width: 100%;
     height: auto;
 }
 
@@ -150,6 +194,10 @@
     &:hover {
         /* Рамка через box-shadow */
         box-shadow: 0 0 0 1px $corporate_color, 0 2px 4px rgba(0, 0, 0, 0.1);
+    }
+
+    @media (max-width: $phone_breakpoint) {
+        height: 100%;
     }
 }
 
@@ -176,6 +224,21 @@
     background-color: #fff;
 }
 
+/* Кнопка Деловые знакомства */
+.btn-wrap {
+    text-align: center;
+    margin-top: 90px;
+
+    @media (max-width: $phone_breakpoint) {
+        margin-top: 80px;
+    }
+}
+
+.show-btn {
+    box-shadow: 0 0 0 5px rgb(255 0 0 / 31%);
+    outline: 1px solid rgb(238 0 0 / 60%);
+}
+
 /* Статьи */
 .article-card {
     background-color: rgba(255, 255, 255, 0.151);
@@ -200,8 +263,21 @@
 }
 
 /* ВСЕ статьи - Список */
+.hidden-tag {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    padding: 0;
+    margin: -1px;
+    overflow: hidden;
+    clip: rect(0, 0, 0, 0);
+    /* Для совместимости */
+    white-space: nowrap;
+    border: 0;
+}
+
 .all-articles-name {
-    margin-top: 100px;
+    margin-top: 90px;
     font-weight: 600;
     font-size: 40px;
     line-height: 36px;
@@ -209,11 +285,13 @@
     text-align: center;
 
     @media (max-width: $tablet_breakpoint) {
+        margin-top: 70px;
         font-size: 30px;
         line-height: 29px;
     }
 
     @media (max-width: $phone_breakpoint) {
+        margin-top: 70px;
         font-size: 20px;
         line-height: 24px;
     }
@@ -253,7 +331,7 @@
     }
 
     @media (max-width: $phone_breakpoint) {
-        width: 385px;
+        width: 360px;
     }
 
 }
@@ -283,6 +361,8 @@
 }
 
 .el-articles-name {
+    /* Интерпретирует в шаблоне \n как реальные переносы строк */
+    white-space: pre-line;
     /* Правая колонка */
     grid-column: 2;
     /* Верхняя строка */
@@ -301,10 +381,11 @@
         font-size: 16px;
         line-height: 22px
     }
-
 }
 
 .el-articles-about {
+    /* Интерпретирует в шаблоне \n как реальные переносы строк */
+    white-space: pre-line;
     /* Правая колонка */
     grid-column: 2;
     /* Нижняя строка */
@@ -320,8 +401,14 @@
     }
 }
 
+.shows-all-wrap {
+    display: flex;
+    justify-content: center;
+}
+
 .shows-all {
     outline: none;
+    margin-top: 15px;
 
     @media (max-width: $phone_breakpoint) {
         margin-top: 35px;

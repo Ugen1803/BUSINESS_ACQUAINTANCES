@@ -2,7 +2,17 @@
 
 <template>
   <div class="page-wrapper">
-    <h1 class="hidden">Деловые знакомства</h1>
+    <!-- Контейнер для фона (замена ::before из CSS) -->
+    <div class="background-container">
+      <!-- aria-hidden - атрибут, делающий декоративное изображение невидимым для пользователей скрин-ридеров -->
+      <picture aria-hidden="true">
+        <!-- WebP для современных браузеров -->
+        <source srcset="images/background.webp" type="image/webp">
+        <!-- Fallback на PNG -->
+        <img class="background-img" src="images/background.png" alt="" width="1024" height="662" fetchpriority="high"
+          loading="eager">
+      </picture>
+    </div>
 
     <!-- ОПИСАНИЕ главной страницы -->
     <MainDescription />
@@ -10,7 +20,6 @@
     <!-- Раздел СТАТЬИ -->
     <section class="articles">
       <div class="container">
-        <h2 class="hidden">Статьи</h2>
 
         <!-- ИЗБРАННЫЕ статьи - Визуальная карусель из 6 статей с Swiper -->
         <div class="recommended-articles-wrap">
@@ -19,7 +28,7 @@
           </h2>
 
           <p class="recommended-articles-about">
-            Ежедневно обновляемая подборка материалов о психологии, партнерстве и личностном росте
+            Ежедневно обновляемая подборка материалов о бизнесе, партнерстве и управлении
           </p>
 
           <!-- Показываем сетку ИЗБРАННЫЕ статьи только если есть данные -->
@@ -32,9 +41,10 @@
             <!-- Увеличено расстояние для "выглядывания" -->
             <!-- Центрируем активный слайд -->
             <!-- Включаем 3D-эффект coverflow -->
-            <swiper :key="carouselKey" :modules="[Navigation, Pagination, Autoplay, EffectCoverflow]" :navigation="true"
+            <swiper :key="carouselKey" :modules="[Navigation, Pagination, Autoplay, EffectCoverflow]"
               :autoplay="{ delay: 3000, disableOnInteraction: false }" :pagination="{ clickable: true }"
-              :slidesPerView="1.6" :spaceBetween="10" :centeredSlides="true" :effect="'coverflow'" :coverflowEffect="{
+              :navigation="true" :slidesPerView="1.6" :spaceBetween="10" :centeredSlides="true" :effect="'coverflow'"
+              :coverflowEffect="{
                 rotate: 120, // Угол поворота боковых слайдов (в градусах; уменьши до 0, если не нужен поворот)
                 stretch: 0, // Растяжение (0 для симметрии)
                 depth: 2000, // Глубина 3D-эффекта (больше — сильнее)
@@ -43,7 +53,8 @@
               }" :loop="true" class="my-swiper">
               <swiper-slide v-for="(article, index) in carousel" :key="article.id">
                 <router-link :to="article.link" class="swiper-slide-card">
-                  <h4 class="el-articles-name">{{ article.name }}</h4>
+                  <h2 class="hidden-tag" aria-label="Избранная статья из карусели для мобильного"> </h2>
+                  <h3 class="el-articles-name">{{ article.name }}</h3>
                   <p class="el-articles-about">{{ article.about }}</p>
                 </router-link>
               </swiper-slide>
@@ -53,41 +64,52 @@
           <!-- Сетка 3x2 на десктопе (>768px) -->
           <div v-else class="articles-grid">
             <router-link :to="article.link" :key="article.id" class="article-card" v-for="(article, index) in carousel">
-              <h4 class="el-articles-name">{{ article.name }}</h4>
+              <h2 class="hidden-tag" aria-label="Избранная статья из сетки 3x2 для десктопа"> </h2>
+              <h3 class="el-articles-name">{{ article.name }}</h3>
               <p class="el-articles-about">{{ article.about }}</p>
             </router-link>
           </div>
         </div>
 
+        <!-- Кнопка Деловые знакомства -->
+        <div class="btn-wrap">
+          <a class="show-btn btn-link" href="https://t.me/business_dating_bot" target="_blank" rel="noopener noreferrer">
+            Деловые знакомства
+          </a>
+        </div>
+
+
         <!-- ВСЕ статьи - Список -->
-        <h2 class="all-articles-name">
+        <h3 class="all-articles-name">
           Все статьи
-        </h2>
+        </h3>
 
         <!-- "Элементы Списка статей" - Динамический список с v-for -->
         <ul class="el-articles-wrap">
           <li class="el-articles" v-for="(article, index) in articles" :key="article.id" v-show="index < 10 || showAll">
             <router-link :to="article.link" class="el-articles-link">
-              <h3 class="el-articles-number">
+              <h4 class="el-articles-number">
                 {{ article.id }} <!-- Динамический номер из массива -->
-              </h3>
-              <h3 class="el-articles-name">
+              </h4>
+              <h4 class="el-articles-name">
                 {{ article.name }} <!-- Динамическое название -->
-              </h3>
+              </h4>
               <p class="el-articles-about">
                 {{ article.about }} <!-- Динамическое описание -->
               </p>
             </router-link>
           </li>
+        </ul>
 
-          <!-- Кнопка с динамическим текстом -->
+        <!-- Кнопка с динамическим текстом -->
+        <div class="shows-all-wrap">
           <button @click="toggleShowAll" class="btn-link shows-all">
             {{ buttonText }}
             <!-- Иконка стрелки (если Bootstrap Icons установлены) -->
-            <i :class="showAll ? 'bi bi-chevron-up ms-2' : 'bi bi-chevron-down ms-2'"></i>
+            <i :class="['fas', 'fa-chevron-' + (showAll ? 'up' : 'down'), 'ms-2']"></i>
           </button>
+        </div>
 
-        </ul>
       </div>
     </section>
   </div>
@@ -108,26 +130,26 @@ import 'swiper/css/effect-coverflow';
 
 const showAll = ref(false);
 const articles = ref([
-  { id: 1, link: '/page1', name: 'Секреты разведки: как справиться с тревогой', about: 'Эффективный метод борьбы с тревожными состояниями' },
+  { id: 1, link: '/page1', name: 'Секреты разведки: как справиться с тревогой?', about: 'Эффективный метод борьбы с тревожными состояниями' },
   { id: 2, link: '/page2', name: 'Как выбрать арбуз любимой девушке?', about: 'Простой гид по выбору вкусного арбуза для романтического сюрприза' },
   { id: 3, link: '/page3', name: 'Как выбрать дыню любимой девушке?', about: 'Простой гид по выбору сладкой дыни для романтического подарка' },
-  { id: 4, link: '/page4', name: 'Выгодное партнерство на основе нейромедиаторов', about: 'Статья скоро будет загружена' },
-  { id: 5, link: '/page5', name: 'Соционика - ключ к поиску своих', about: 'Статья скоро будет загружена' },
-  { id: 6, link: '/page6', name: 'Как привлечь удачу, основы физики', about: 'Статья скоро будет загружена' },
+  { id: 4, link: '/page4', name: 'Выбор стратегии по MBA', about: 'Ключ к успеху на рынке - наличие стратегии' },
+  { id: 5, link: '/page5', name: 'Управление людьми', about: 'Методы повышения эффективности работы коллектива' },
+  { id: 6, link: '/page6', name: 'Законы удачи', about: 'Физика привлечения удачи' },
   { id: 7, link: '/page7', name: 'Как влюбить в себя кого угодно?', about: 'Секреты счастливой любви' },
-  { id: 8, link: '/page8', name: 'Эмоциональные потребности', about: 'Статья скоро будет загружена' },
-  { id: 9, link: '/page9', name: 'Специи для гурманов', about: 'Статья скоро будет загружена' },
-  { id: 10, link: '/page10', name: 'Секреты богатства', about: 'Статья скоро будет загружена' },
-  { id: 11, link: '/page11', name: 'Женщине нужна перспектива!', about: 'Статья скоро будет загружена' },
-  { id: 12, link: '/page12', name: 'Как сделать так, чтобы вас боялись и уважали?', about: 'Статья скоро будет загружена' },
-  { id: 13, link: '/page13', name: 'Как воздействовать и добиваться своего?', about: 'Статья скоро будет загружена' },
+  { id: 8, link: '/page8', name: 'Как быстро восстановить упадок сил и энергии', about: 'Методы восстановления энергии после усталости' },
+  { id: 9, link: '/page9', name: 'Как поймать счастье', about: 'Секретная методика' },
+  { id: 10, link: '/page10', name: '7 правил как привлечь богатство', about: 'На основе книги "Самый богатый человек в Вавилоне"' },
+  { id: 11, link: '/page11', name: 'Где искать спонсоров и коммерческих партнеров \n для мероприятия', about: 'Готовый гид для организаторов ивентов' },
+  { id: 12, link: '/page12', name: 'Каковы 5 «П» сотрудничества?', about: 'Пять «П» сотрудничества: как команды становятся сильнее, чем сумма своих частей' },
+  { id: 13, link: '/page13', name: 'Секреты построения совместного счастливого будущего \n от наших бабушек', about: 'Как советские женщины строили брак' },
   { id: 14, link: '/page14', name: 'Что едят нутрициологи?', about: 'Здоровое питание - основа долголетия и здоровья' },
-  { id: 15, link: '/page15', name: 'Рецепт счастья от психолога', about: 'Статья скоро будет загружена' },
-  { id: 16, link: '/page16', name: 'Линька у человека: как бороться', about: 'Статья скоро будет загружена' },
+  { id: 15, link: '/page15', name: 'Духовность как ключ к успеху в материальном мире', about: 'Как развиваться духовно и при этом жить в изобилии' },
+  { id: 16, link: '/page16', name: 'Коллаборации как взаимовыгодное партнерство', about: 'Взаимовыгодное сотрудничество' },
   { id: 17, link: '/page17', name: 'Правила женщины, которая получает всё', about: 'Секреты всех уверенных женщин' },
   { id: 18, link: '/page18', name: 'Как быстро распознать психопата?', about: '10 чётких признаков, чтобы не стать жертвой харизмы и холода' },
-  { id: 19, link: '/page19', name: 'Как проверить совместимость в любви?', about: 'Статья скоро будет загружена' },
-  { id: 20, link: '/page20', name: 'Как понять, что это «твой» человек?', about: 'Как распознать настоящую любовь и найти того, с кем можно быть собой?' },
+  { id: 19, link: '/page19', name: 'Ситуационное лидерство: \n цель, идеи и суть концепции руководства', about: 'Как работает эта модель руководства?' },
+  { id: 20, link: '/page20', name: 'Как понять, что это «твой» человек?', about: 'Как распознать настоящую любовь \n и найти того, с кем можно быть собой?' },
 ]);
 
 // Реактивная переменная для сетки

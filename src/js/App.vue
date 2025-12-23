@@ -4,7 +4,9 @@
   <div id="app">
 
     <!-- HEADER и МЕНЮ сайта -->
-    <HeaderSite />
+    <header class="header">
+      <HeaderSite />
+    </header>
 
     <!-- MAIN - Главная станица -->
     <main class="main">
@@ -12,7 +14,9 @@
     </main>
 
     <!-- FOOTER - Подвал сайта -->
-    <FooterSite />
+    <footer class="footer">
+      <FooterSite />
+    </footer>
 
     <!-- Стрелка Верх -->
     <ScrollToTop />

@@ -17,11 +17,11 @@ ol {
 }
 
 html {
-    height: 100%;
+    min-height: 100vh;
 }
 
 body {
-    font-family: 'Lato', sans-serif;
+    font-family: 'Lato', sans-serif; // Fallback гарантирует видимость текста
     font-weight: 400;
     font-size: 14px;
     min-height: 100vh; // Чтобы страница всегда занимала минимум высоту viewport
@@ -30,12 +30,12 @@ body {
 #app {
     display: flex;
     flex-direction: column;
-    height: 100%;
+    min-height: 100vh;
 }
 
 /* Метод прижать Футер к низу страницы */
 .main {
-    flex-grow: 1;
+    flex: 1;
 }
 
 /* АДАПТИВ БЛОКОВ ДЛЯ РАЗНЫХ ДЕВАЙСОВ */

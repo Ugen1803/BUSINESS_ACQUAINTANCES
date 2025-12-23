@@ -5,14 +5,13 @@
     <div class="container">
 
       <div class="main-description-wrap">
-        <h3 class="main-description-name">
+        <h1 class="main-description-name">
           Деловые знакомства
-        </h3>
-        <h3 class="main-description-about">
+        </h1>
+        <p class="main-description-about">
           Знакомства, которые работают на тебя.<br />
-          Сообщество для профессионального нетворкинга. <br />
-          Полезные статьи о психологии, партнерстве и эффективном общении.
-        </h3>
+          Сообщество для профессионального нетворкинга.
+        </p>
       </div>
 
     </div>
@@ -22,4 +21,3 @@
 <script setup name="MainDescription">
 
 </script>
-
