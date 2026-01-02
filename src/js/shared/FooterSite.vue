@@ -20,7 +20,7 @@
 
     </div>
     <div class="footer-wrap">
-      <p class="p-footer">© 2025 Все права защищены</p>
+      <p class="p-footer">© 2026 Все права защищены</p>
 
       <!-- Договор публичной оферты -->
       <div class="offer-wrap">
